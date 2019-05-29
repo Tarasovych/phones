@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Contacts{% endblock %}</title>
+
+    {% block stylesheets %}
+        <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet"/>
+    {% endblock %}
+</head>
+<body>
+{% block body %}
+    <div class="container">
+    <div>
+        <label>Search</label>
+        <form action="{{ path('contact_index') }}" method="GET">
+            <input type="text" name="q" value="{{ app.request.get('q') }}"/>
+        </form>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">
+                {{ knp_pagination_sortable(users, 'First Name', 'firstName') }}
+            </th>
+            <th scope="col">
+                {{ knp_pagination_sortable(users, 'Last Name', 'lastName') }}
+            </th>
+            <th scope="col">Phones</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.firstName|e }}</td>
+                <td>{{ user.lastName|e }}</td>
+                <td>
+                    {% for phone in user.phones %}
+                        <li>{{ phone.number|e }}</li>
+                    {% endfor %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="navigation">
+        {{ knp_pagination_render(users) }}
+    </div>
+    </div>{% endblock %}
+{% block javascripts %}{% endblock %}
+</body>
+</html>
