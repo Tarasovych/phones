@@ -2,12 +2,8 @@
 
 namespace App\Controller\Api\v1;
 
-use App\Entity\Phone;
-use App\Entity\User;
 use App\Form\ContactType;
 use FOS\RestBundle\Controller\Annotations as Rest;
-use Pagerfanta\Adapter\DoctrineORMAdapter;
-use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

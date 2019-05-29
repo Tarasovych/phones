@@ -41,17 +41,4 @@ class UserRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-
-    /**
-     * @param $value
-     * @return
-     */
-    public function search($value)
-    {
-        $finder = $this->container->get('fos_elastica.finder.app_user.user');
-
-        $results = $finder->find($value);
-
-        return $results;
-    }
 }

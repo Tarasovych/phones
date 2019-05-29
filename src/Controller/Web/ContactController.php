@@ -11,7 +11,6 @@ class ContactController extends AbstractController
 {
     /**
      * Creates a Contact resource
-     * @Rest\Get("/contacts")
      * @param Request $request
      * @param PaginatorInterface $paginator
      * @param $finder
