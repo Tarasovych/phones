@@ -4,26 +4,27 @@ namespace App\Controller\Api\v1;
 
 use App\Form\ContactType;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class ContactController extends Controller
+class ContactController extends AbstractController
 {
     /**
      * Creates a Contact resource
      * @Rest\Post("/contacts")
      * @param Request $request
+     * @param $contactProducer
      * @return Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $contactProducer)
     {
         $form = $this->createForm(ContactType::class, $request->request->all());
         $form->submit($request->request->all());
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->get('old_sound_rabbit_mq.store_contact_producer')
+            $contactProducer
                 ->setContentType('application/json')
                 ->publish(\json_encode($request->request->all()));
 

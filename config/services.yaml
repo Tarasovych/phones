@@ -33,3 +33,7 @@ services:
     App\Controller\Web\ContactController:
         bind:
             $finder: '@fos_elastica.finder.app_user.user'
+
+    App\Controller\Api\v1\ContactController:
+        bind:
+            $contactProducer: '@old_sound_rabbit_mq.store_contact_producer'
