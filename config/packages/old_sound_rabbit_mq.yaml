@@ -1,0 +1,15 @@
+old_sound_rabbit_mq:
+  connections:
+    default:
+      url: '%env(RABBITMQ_URL)%'
+  producers:
+    store_contact:
+      connection:       default
+      exchange_options: { name: 'store_contact', type: direct }
+
+  consumers:
+    store_contact:
+      connection:       default
+      exchange_options: { name: 'store_contact', type: direct }
+      queue_options:    { name: 'store_contact' }
+      callback:         app.consumer.contact_saver
